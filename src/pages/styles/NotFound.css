@@ -1,0 +1,21 @@
+.container_404 {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Notfound img {
+    display: block;
+}
+
+.Notfound .back {
+    display: block;
+    background-color: #F4F4F7;
+    margin: 30px auto;
+    border: 1px solid #343434;
+    color: #343434;
+    border-radius: 5px;
+    width: 25%;
+}

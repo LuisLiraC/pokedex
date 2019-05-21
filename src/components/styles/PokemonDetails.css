@@ -1,0 +1,127 @@
+.Pokemon__details,
+.Pokemon__stats,
+.Evolution_chain {
+    background: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.Pokemon__name {
+    text-transform: capitalize;
+}
+
+.Pokemon__height,
+.Pokemon__weight {
+    font-size: 12px;
+}
+
+.Pokemon__types {
+    padding: 0px;
+    text-align: center;
+}
+
+.Pokemon__types-badges {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    height: 70%;
+}
+
+.Pokemon__type {
+    width: 40px;
+    height: 15px;
+}
+
+.Pokemon__header, 
+.Pokemon__sprites-default, 
+.Pokemon__sprites-shiny {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Pokemon__sprites-default img, 
+.Pokemon__sprites-shiny img {
+    height: 96px;
+    width: 96px;
+}
+
+.Pokemon__stats,
+.Pokemon__Navigate,
+.Evolution_chain {
+    margin-top: 15px;
+    padding-bottom: 0px;
+}
+
+.Pokemon__stats-speed,
+.Pokemon__stats-special_defense,
+.Pokemon__stats-special_attack,
+.Pokemon__stats-attack,
+.Pokemon__stats-defense,
+.Pokemon__stats-hp {
+    padding: 0px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.Evolution_chain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Evolution_chain_first,
+.Evolution_chain_second,
+.Evolution_chain_third {
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: bold;
+    margin: 0 20px;
+}
+
+.Pokemon__Navigate {
+    display: flex;
+    text-align: center;
+    padding: 0px 25px;
+}
+
+.Pokemon__Navigate a,
+.Evolution_chain_link {
+    color: black;
+    text-decoration: none !important;
+}
+
+.Evolution_chain_link:hover {
+    color: black;
+}
+
+.Pokemon__Navigate-prev,
+.Pokemon__Navigate-next {
+    display: flex;
+    align-items: flex-end;
+    font-weight: bold;
+}
+
+.Next {
+    width: 32px;
+    height: 32px;
+}
+
+.Pokemon__Navigate-prev {
+    margin-right: auto;
+}
+
+.Pokemon__Navigate-next {
+    margin-left: auto;
+}
+
+.Pokemon__Navigate img {
+    height: 60px;
+    width: 60px;
+}
+

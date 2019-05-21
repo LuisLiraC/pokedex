@@ -1,0 +1,14 @@
+.loading {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.loading__msg {
+    font-weight: bold;
+    margin: 0px;
+}
+
+.loading__img {
+    width: 30%;
+}

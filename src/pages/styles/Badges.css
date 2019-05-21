@@ -1,0 +1,26 @@
+.Badges__hero {
+    width: 100%;
+    padding: 2rem 0;
+    background: url('../../images/stars.svg'), #1B1B25;
+    background-repeat: repeat;
+  }
+  
+  .Badges__hero>.Badges__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .Badges__container {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+  }
+  
+  .Badges_pokedex-logo {
+    margin-bottom: 2rem;
+  }
+  
+
+
+  
