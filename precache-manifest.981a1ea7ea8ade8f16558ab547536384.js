@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/pokedex/static/media/error.f3fa9524.png"
   },
   {
-    "revision": "be4e755b363a2075abf6",
+    "revision": "89b30a52d8e98b7974f9",
     "url": "/pokedex/static/css/main.618a1664.chunk.css"
   },
   {
@@ -28,8 +28,8 @@ self.__precacheManifest = [
     "url": "/pokedex/static/media/loading.6689dc33.gif"
   },
   {
-    "revision": "be4e755b363a2075abf6",
-    "url": "/pokedex/static/js/main.be4e755b.chunk.js"
+    "revision": "89b30a52d8e98b7974f9",
+    "url": "/pokedex/static/js/main.89b30a52.chunk.js"
   },
   {
     "revision": "2724690402f7665826cc6e35f45dc9cb",
@@ -52,7 +52,7 @@ self.__precacheManifest = [
     "url": "/pokedex/static/css/2.de2516d6.chunk.css"
   },
   {
-    "revision": "431b10e9cb6cb8dca098dfdae5b8fa5c",
+    "revision": "bb457c78aa3e6f485b147e598572b325",
     "url": "/pokedex/index.html"
   }
 ];
