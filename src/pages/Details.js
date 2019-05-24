@@ -59,6 +59,13 @@ class Details extends Component {
             const first_pokemon_name = evolution_chain_data.chain.species.name
             const first_pokemon_id = evolution_chain_data.chain.species.url.substring(42, evolution_chain_data.chain.species.url.length - 1)
 
+            var test = []
+
+            evolution_chain_data.chain.evolves_to.forEach(element => {
+                console.log(element)
+                test.push(element)
+            });
+
             // Second Pokemon: Pikachu / Vaporeon / Silcoon
             if(evolution_chain_data.chain.evolves_to.length > 0){
                 var second_pokemon_name = evolution_chain_data.chain.evolves_to[0].species.name
@@ -87,6 +94,7 @@ class Details extends Component {
                         third_pokemon_variant_name = ""
                         third_pokemon_variant_id = ""
                     }
+
                 } else {
                     third_pokemon_name = ""
                     third_pokemon_id = ""
@@ -122,6 +130,9 @@ class Details extends Component {
                 error: true
             })
         }
+
+        console.log(test)
+        console.log(test[0])
 
     }
 

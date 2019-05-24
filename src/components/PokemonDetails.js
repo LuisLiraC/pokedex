@@ -121,7 +121,7 @@ export default function PokemonDetails(props) {
 
             </div>
 
-            {evolution.third_pokemon_variant_name !== "" && (
+            {evolution.third_pokemon_variant_name !== "" && evolution.third_pokemon_variant_name !== undefined  && (
                 <div className="Evolution_chain">
 
                         <Link to={{pathname: `/pokemon/${evolution.first_pokemon_name}`}} className="Evolution_chain_link">
