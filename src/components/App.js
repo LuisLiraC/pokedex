@@ -12,6 +12,7 @@ function App(){
             <Layout>
                 <Switch>
                     <Route exact path="/" component={Badges} />
+                    <Route exact path="/pokedex" component={Badges} />
                     <Route exact path="/pokemon" component={Badges} />
                     <Route exact path="/pokemon/search" component={BadgeNew} />
                     <Route exact path="/pokemon/:pokemonName" component={Details} />
