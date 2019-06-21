@@ -12,18 +12,7 @@ class Details extends Component {
     state = {
         loading: true,
         data: '',
-        evolution_data: {
-            first_pokemon_name: '',
-            first_pokemon_id: '',
-            second_pokemon_name: '',
-            second_pokemon_id: '',
-            second_pokemon_variant_name: '',
-            second_pokemon_variant_id: '',
-            third_pokemon_name: '',
-            third_pokemon_id: '',
-            third_pokemon_variant_name: '',
-            third_pokemon_variant_id: ''
-        },
+        evolutionData: '',
         prevPokemon: '',
         nextPokemon: '',
         error: null
@@ -55,73 +44,43 @@ class Details extends Component {
             const evolution_chain_data = await fetch(evolution_chain_URL)
                                          .then((response) => response.json());
             
-            // Initial Pokemon: Pichu / Eevee / Wurmple
-            const first_pokemon_name = evolution_chain_data.chain.species.name
-            const first_pokemon_id = evolution_chain_data.chain.species.url.substring(42, evolution_chain_data.chain.species.url.length - 1)
-
-            var test = []
-
-            evolution_chain_data.chain.evolves_to.forEach(element => {
-                console.log(element)
-                test.push(element)
-            });
-
-            // Second Pokemon: Pikachu / Vaporeon / Silcoon
-            if(evolution_chain_data.chain.evolves_to.length > 0){
-                var second_pokemon_name = evolution_chain_data.chain.evolves_to[0].species.name
-                var second_pokemon_id = evolution_chain_data.chain.evolves_to[0].species.url.substring(42, evolution_chain_data.chain.evolves_to[0].species.url.length - 1)
-
-                // Second Pokemon 2: Jolteon / Cascoon
-                if(evolution_chain_data.chain.evolves_to.length > 1){
-                    var second_pokemon_variant_name = evolution_chain_data.chain.evolves_to[1].species.name
-                    var second_pokemon_variant_id = evolution_chain_data.chain.evolves_to[1].species.url.substring(42, evolution_chain_data.chain.evolves_to[0].species.url.length - 1)
-                } else {
-                    second_pokemon_variant_name = ""
-                    second_pokemon_variant_id = ""
-                }
-                
-
-                // Third Pokemon: Raichu / Viplume
-                if(evolution_chain_data.chain.evolves_to[0].evolves_to.length > 0){
-                    var third_pokemon_name = evolution_chain_data.chain.evolves_to[0].evolves_to[0].species.name
-                    var third_pokemon_id = evolution_chain_data.chain.evolves_to[0].evolves_to[0].species.url.substring(42, evolution_chain_data.chain.evolves_to[0].evolves_to[0].species.url.length - 1)
-
-                    // Third Pokemon 2: Politoed
-                    if(evolution_chain_data.chain.evolves_to[0].evolves_to.length > 1){
-                        var third_pokemon_variant_name = evolution_chain_data.chain.evolves_to[0].evolves_to[1].species.name
-                        var third_pokemon_variant_id = evolution_chain_data.chain.evolves_to[0].evolves_to[1].species.url.substring(42, evolution_chain_data.chain.evolves_to[0].evolves_to[1].species.url.length - 1)
-                    } else {
-                        third_pokemon_variant_name = ""
-                        third_pokemon_variant_id = ""
-                    }
-
-                } else {
-                    third_pokemon_name = ""
-                    third_pokemon_id = ""
-                }
-                
-            } else {
-                second_pokemon_name = ""
-                second_pokemon_id = ""
+            const EvolutionData = {
+                Pokemon1: [],
+                Pokemon2: [],
+                Pokemon3: []
             }
+            
+            // Base Pokemon
+            const PokemonData1 = evolution_chain_data.chain
+            const firsEvolutionName = PokemonData1.species.name
+            const firstEvolutionId = PokemonData1.species.url.substring(42, PokemonData1.species.url.length - 1)
+            EvolutionData.Pokemon1.push({id: firstEvolutionId, name: firsEvolutionName})
 
+            // Second Evolution(s)
+            const PokemonData2 = PokemonData1.evolves_to
+            if(PokemonData2.length > 0){
+                PokemonData2.forEach(secondPokemon => {
+                    const secondEvolutionName = secondPokemon.species.name
+                    const secondEvolutionId = secondPokemon.species.url.substring(42, secondPokemon.species.url.length - 1)
+                    EvolutionData.Pokemon2.push({id: secondEvolutionId, name: secondEvolutionName})
+
+                    // Third Evolution(s)
+                    const PokemonData3 = secondPokemon.evolves_to
+                    if(PokemonData3.length > 0){
+                        PokemonData3.forEach(thirdPokemon =>{
+                            const thirdEvolutionName = thirdPokemon.species.name
+                            const thirdEvolutionId = thirdPokemon.species.url.substring(42, thirdPokemon.species.url.length - 1)
+                            EvolutionData.Pokemon3.push({id: thirdEvolutionId, name: thirdEvolutionName})
+                        })
+                    }
+                });
+            }
 
             this.setState({
                 data: data,
                 prevPokemon: prevPokemon,
                 nextPokemon: nextPokemon,
-                evolution_data: {
-                    first_pokemon_name: first_pokemon_name,
-                    first_pokemon_id: first_pokemon_id,
-                    second_pokemon_name: second_pokemon_name,
-                    second_pokemon_id: second_pokemon_id,
-                    second_pokemon_variant_name: second_pokemon_variant_name,
-                    second_pokemon_variant_id: second_pokemon_variant_id,
-                    third_pokemon_name: third_pokemon_name,
-                    third_pokemon_id: third_pokemon_id,
-                    third_pokemon_variant_name: third_pokemon_variant_name,
-                    third_pokemon_variant_id: third_pokemon_variant_id
-                },
+                evolutionData: EvolutionData,
                 loading: false
             })
         } catch (error) {
@@ -130,9 +89,6 @@ class Details extends Component {
                 error: true
             })
         }
-
-        console.log(test)
-        console.log(test[0])
 
     }
 
@@ -149,7 +105,7 @@ class Details extends Component {
                             pokemon={this.state.data} 
                             prevPokemon={this.state.prevPokemon} 
                             nextPokemon={this.state.nextPokemon} 
-                            evolution_data={this.state.evolution_data}
+                            evolutionData={this.state.evolutionData}
                         />
                     )}
                     {this.state.loading && (

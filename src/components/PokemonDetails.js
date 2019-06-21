@@ -7,7 +7,69 @@ export default function PokemonDetails(props) {
     const pokemon = props.pokemon;
     const prevPokemon = props.prevPokemon;
     const nextPokemon = props.nextPokemon;
-    const evolution = props.evolution_data;
+    const evolutionData = props.evolutionData;
+
+    const Evolutions =[]
+
+    var i = 0;
+    if(evolutionData.Pokemon3.length > 0){
+        evolutionData.Pokemon3.forEach(Third => {
+            evolutionData.Pokemon2.forEach(Second => {
+                evolutionData.Pokemon1.forEach(First => {
+                    
+                    if(First.name === "wurmple" & i === 1){
+                        Evolutions.push({
+                            firstId: First.id,
+                            firstName: First.name,
+                            secondId: 268,
+                            secondName: "cascoon",
+                            thirdId: 269,
+                            thirdName: "dustox"
+                        })
+                        return
+                    } 
+                    
+                    if(First.name === "wurmple" & i === 0){
+                        i++;
+                    }
+
+                    Evolutions.push({
+                        firstId: First.id,
+                        firstName: First.name,
+                        secondId: Second.id,
+                        secondName: Second.name,
+                        thirdId: Third.id,
+                        thirdName: Third.name
+                    })
+
+                })
+            })
+        });
+    }
+
+    if(evolutionData.Pokemon3.length < 1 && evolutionData.Pokemon2.length > 0){
+        evolutionData.Pokemon2.forEach(Second => {
+            evolutionData.Pokemon1.forEach(First => {
+                Evolutions.push({
+                    firstId: First.id,
+                    firstName: First.name,
+                    secondId: Second.id,
+                    secondName: Second.name,
+                })
+            })
+        })
+    }
+
+    if(evolutionData.Pokemon2.length < 1 && evolutionData.Pokemon1.length > 0){
+        evolutionData.Pokemon1.forEach(First => {
+            Evolutions.push({
+                firstId: First.id,
+                firstName: First.name,
+            })
+        })
+    }
+
+    console.log(Evolutions)
     return(
         <React.Fragment>
 
@@ -83,91 +145,71 @@ export default function PokemonDetails(props) {
             </div>
 
             {/* Evolutions */}
-
-            <div className="Evolution_chain">
-
-                    <Link to={{pathname: `/pokemon/${evolution.first_pokemon_name}`}} className="Evolution_chain_link">
-                        <div className="Evolution_chain_first">
-                            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolution.first_pokemon_id}.png`} alt={`${evolution.first_pokemon_name} Normal Front`} />
-                            <p className="Evolution_chain_first_name">{evolution.first_pokemon_name}</p>
-                        </div>
-                    </Link>
-                    
-                {evolution.second_pokemon_name !== "" && (
-                    <img src={Next} alt="Next" className="Next" />
-                )}
-
-                {evolution.second_pokemon_name !== "" && (
-                    <Link to={{pathname: `/pokemon/${evolution.second_pokemon_name}`}} className="Evolution_chain_link">
-                        <div className="Evolution_chain_second">
-                            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolution.second_pokemon_id}.png`} alt={`${evolution.second_pokemon_name} Normal Front`} />
-                            <p className="Evolution_chain_second_name">{evolution.second_pokemon_name}</p>
-                        </div>
-                    </Link>
-                )}
-
-                {evolution.third_pokemon_name !== "" && (
-                    <img src={Next} alt="Next" className="Next" />
-                )}  
-
-                {evolution.third_pokemon_name !== "" && (
-                    <Link to={{pathname: `/pokemon/${evolution.third_pokemon_name}`}} className="Evolution_chain_link">
-                        <div className="Evolution_chain_third">
-                            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolution.third_pokemon_id}.png`} alt={`${evolution.third_pokemon_name} Normal Front`} />
-                            <p className="Evolution_chain_third_name">{evolution.third_pokemon_name}</p>
-                        </div>
-                    </Link>
-                )}
-
-            </div>
-
-            {evolution.third_pokemon_variant_name !== "" && evolution.third_pokemon_variant_name !== undefined  && (
-                <div className="Evolution_chain">
-
-                        <Link to={{pathname: `/pokemon/${evolution.first_pokemon_name}`}} className="Evolution_chain_link">
+            {evolutionData.Pokemon3.length > 0 && Evolutions.map((Ev)=> {
+                return (
+                    <div className="Evolution_chain">
+                        <Link to={{pathname: `/pokemon/${Ev.firstName}`}} className="Evolution_chain_link">
                             <div className="Evolution_chain_first">
-                                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolution.first_pokemon_id}.png`} alt={`${evolution.first_pokemon_name} Normal Front`} />
-                                <p className="Evolution_chain_first_name">{evolution.first_pokemon_name}</p>
+                                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${Ev.firstId}.png`} alt={`${Ev.firstName} Normal Front`} />
+                                <p className="Evolution_chain_first_name">{Ev.firstName}</p>
                             </div>
                         </Link>
-                        
-                    {evolution.second_pokemon_name !== "" && (
+
                         <img src={Next} alt="Next" className="Next" />
-                    )}
 
-                    {evolution.second_pokemon_name !== "" && evolution.second_pokemon_variant_name === "" && (
-                        <Link to={{pathname: `/pokemon/${evolution.second_pokemon_name}`}} className="Evolution_chain_link">
-                            <div className="Evolution_chain_second">
-                                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolution.second_pokemon_id}.png`} alt={`${evolution.second_pokemon_name} Normal Front`} />
-                                <p className="Evolution_chain_second_name">{evolution.second_pokemon_name}</p>
+                        <Link to={{pathname: `/pokemon/${Ev.secondName}`}} className="Evolution_chain_link">
+                            <div className="Evolution_chain_first">
+                                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${Ev.secondId}.png`} alt={`${Ev.secondName} Normal Front`} />
+                                <p className="Evolution_chain_first_name">{Ev.secondName}</p>
                             </div>
                         </Link>
-                    )}
 
-                    {evolution.second_pokemon_variant_name !== "" && (
-                        <Link to={{pathname: `/pokemon/${evolution.second_pokemon_variant_name}`}} className="Evolution_chain_link">
-                            <div className="Evolution_chain_second">
-                                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolution.second_pokemon_variant_id}.png`} alt={`${evolution.second_pokemon_variant_name} Normal Front`} />
-                                <p className="Evolution_chain_second_name">{evolution.second_pokemon_variant_name}</p>
-                            </div>
-                        </Link>
-                    )}
-
-                    {evolution.third_pokemon_name !== "" && (
                         <img src={Next} alt="Next" className="Next" />
-                    )}  
 
-                    {evolution.third_pokemon_name !== "" && (
-                        <Link to={{pathname: `/pokemon/${evolution.third_pokemon_variant_name}`}} className="Evolution_chain_link">
-                            <div className="Evolution_chain_third">
-                                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolution.third_pokemon_variant_id}.png`} alt={`${evolution.third_pokemon_name} Normal Front`} />
-                                <p className="Evolution_chain_third_name">{evolution.third_pokemon_variant_name}</p>
+                        <Link to={{pathname: `/pokemon/${Ev.thirdName}`}} className="Evolution_chain_link">
+                            <div className="Evolution_chain_first">
+                                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${Ev.thirdId}.png`} alt={`${Ev.thirdName} Normal Front`} />
+                                <p className="Evolution_chain_first_name">{Ev.thirdName}</p>
                             </div>
                         </Link>
-                    )}
+                    </div>
+                )
+            })}
 
-                </div>
-            )}
+            {evolutionData.Pokemon2.length > 0 && evolutionData.Pokemon3.length < 1 && Evolutions.map((Ev)=> {
+                return (
+                    <div className="Evolution_chain">
+                        <Link to={{pathname: `/pokemon/${Ev.firstName}`}} className="Evolution_chain_link">
+                            <div className="Evolution_chain_first">
+                                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${Ev.firstId}.png`} alt={`${Ev.firstName} Normal Front`} />
+                                <p className="Evolution_chain_first_name">{Ev.firstName}</p>
+                            </div>
+                        </Link>
+
+                        <img src={Next} alt="Next" className="Next" />
+
+                        <Link to={{pathname: `/pokemon/${Ev.secondName}`}} className="Evolution_chain_link">
+                            <div className="Evolution_chain_first">
+                                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${Ev.secondId}.png`} alt={`${Ev.secondName} Normal Front`} />
+                                <p className="Evolution_chain_first_name">{Ev.secondName}</p>
+                            </div>
+                        </Link>
+                    </div>
+                )
+            })}
+
+            {evolutionData.Pokemon1.length > 0 && evolutionData.Pokemon2.length < 1 && Evolutions.map((Ev)=> {
+                return (
+                    <div className="Evolution_chain">
+                        <Link to={{pathname: `/pokemon/${Ev.firstName}`}} className="Evolution_chain_link">
+                            <div className="Evolution_chain_first">
+                                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${Ev.firstId}.png`} alt={`${Ev.firstName} Normal Front`} />
+                                <p className="Evolution_chain_first_name">{Ev.firstName}</p>
+                            </div>
+                        </Link>
+                    </div>
+                )
+            })}
 
             {/* Previous and Next Pokemon */}
             
